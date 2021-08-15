@@ -6,26 +6,28 @@ https://www.reddit.com/r/learnpython/comments/p4au9z/date_calculation/
 DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 
+def days_in_month(year: int, month: int) -> int:
+    add = 0
+    if month == 2 and year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
+        add = 1
+    return DAYS_IN_MONTH[month - 1] + add
+
+
 def compute_date(today: tuple[int, int, int], days: int) -> tuple[int, int, int]:
-    # Faster alternative to a function
-    _is_leap_year = lambda year: year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
-
     year, month, day = today
-
-    lst_days = [-1] + DAYS_IN_MONTH  # Optimization so that we may use month as the index
 
     left = days + day - 28  # Get rid of left == 0 situations at the end of the function
     day = 28
 
-    while left + day > lst_days[month]:
-        left -= lst_days[month]
+    in_month = days_in_month(year, month)
+    while left + day > in_month:
+        left -= in_month
 
-        month = month % 12 + 1
+        month = month % 12 + 1  # The next month
         if month == 1:
             year += 1
-        elif month == 2:
-            # Set 29 days for February if leap year, 28 otherwise
-            lst_days[month] = 29 if _is_leap_year(year) else 28
+        
+        in_month = days_in_month(year, month)  # Number of days in the next month
 
     return (year, month, day + left)
 
