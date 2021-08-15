@@ -3,7 +3,6 @@ https://www.reddit.com/r/learnpython/comments/p4s9sx/can_someone_help_me_debug_m
 """
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from msedge.selenium_tools import Edge, EdgeOptions
 
 from typing import Generator
