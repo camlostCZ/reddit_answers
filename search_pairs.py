@@ -21,6 +21,9 @@ def find_pairs_equal_to(number: str, lst: list[int]) -> list[tuple[int, int]]:
             for y in lst[idx:]:
                 if number - x == y:
                     result.append((x, y))
+
+        # Or much less readable:
+        # result = [(x, y) for idx, x in enumerate(lst) for y in lst[idx:] if x + y == number]
     return result
 
 
@@ -45,16 +48,20 @@ def find_pairs_equal_to_OP(number, ln):
         for j in ln:
             if i != j:
                 if (i + j) == number:
-                    a.append((i, j))
-    return a
+                    a.append(min(i, j))
+                    a.append(max(i, j))
+    print(a)
 
 def main() -> None:
     lst = [1, 2, 3, 5, 6, 9]
     total = 7
-    pairs = find_pairs_equal_to2(total, lst)
+    pairs = find_pairs_equal_to(total, lst)
     for item in pairs:
         a, b = item
         print(f"({a}, {b})")
+
+    print("OP version:")
+    find_pairs_equal_to_OP(total, lst)
 
 
 if __name__ == "__main__":
