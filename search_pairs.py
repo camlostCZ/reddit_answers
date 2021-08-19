@@ -6,6 +6,15 @@ from itertools import combinations
 
 
 def find_pairs_equal_to(number: str, lst: list[int]) -> list[tuple[int, int]]:
+    """Simple solutions using for loops.
+
+    Args:
+        number (int): Sum used to filter results
+        lst (list[int]): Source list of integers
+
+    Returns:
+        list[tuple[int, int]]: List of pairs sum of which equals to the number given.
+    """
     result = []
     if len(lst) > 1:
         for idx, x in enumerate(lst):
@@ -16,13 +25,21 @@ def find_pairs_equal_to(number: str, lst: list[int]) -> list[tuple[int, int]]:
 
 
 def find_pairs_equal_to2(number: int, lst: list[int]) -> list[tuple[int, int]]:
-    if len(lst) > 1:
-        return [x for x in combinations(lst, 2) if sum(x) == number]
-    else:
-        return []
+    """The solutions using itertools.combinations().
+
+    Args:
+        number (int): Sum used to filter results
+        lst (list[int]): Source list of integers
+
+    Returns:
+        list[tuple[int, int]]: List of pairs sum of which equals to the number given.
+    """
+    return [x for x in combinations(lst, 2) if sum(x) == number]
 
 
 def find_pairs_equal_to_OP(number, ln):
+    """Original code as posted by the OP. Doesn't work as expected.
+    """
     a = []
     for i in ln:
         for j in ln:
