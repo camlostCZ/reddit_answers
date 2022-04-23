@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup, ResultSet, Tag
 
 
 URL = "https://www.rottentomatoes.com/top/bestofrt/"
-TOP = 3
+TOP = 3  # How many movies should be displayed
 
 
 class RottenTomatoesError(RuntimeError):
@@ -55,6 +55,7 @@ def main() -> None:
         print(f"Error: {e}")
     except requests.exceptions.ConnectionError:
         print(f"Error: Unable to connect to {URL}.")
+
 
 if __name__ == "__main__":
     try:
