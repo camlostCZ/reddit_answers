@@ -11,6 +11,10 @@ def get_upper_triangle(letter: str) -> list[str]:
     for i, item in enumerate(ascii_uppercase[:size]):
         line = [' '] * size
         line[size - i - 1] = item
+
+        # Join line and tail of the same line reversed
+        # Example: "..A" + ".." -> "..A.."
+        # Example: ".B." + "B." -> ".B.B."
         result.append("".join(line + list(reversed(line))[1:]))
     return result
 
