@@ -47,6 +47,49 @@ class UnknownWordError(IndexError):
     pass
 
 
+def parse_number_string_rtl(
+        data: str,
+        mapping: dict[str, int] = NUMBERS_MAP) -> int:
+    """
+    Parse word numbers to int.
+    Example: "two hundred seven" -> 207
+
+    Args:
+        data: Number written in words
+        mapping: Dictionary used to translate words to values
+
+    Returns:
+        Resulting number
+
+    Raises:
+        UnknownWordError in case of unknown words
+    """
+
+    pattern = re.compile(r"[ -]")
+    words = pattern.split(data.lower())[::-1]
+
+    result = 0
+    sum1000 = 0
+    base = 1
+    mul = 1
+    for item in words:
+        try:
+            value = mapping[item]
+            if value < 100:
+                sum1000 += value * mul
+            elif value == 100:
+                mul = value
+            else:  # 1000, 1000000, etc.
+                result += sum1000 * base
+                sum1000 = 0
+                base = value
+                mul = 1
+        except KeyError:
+            raise UnknownWordError(f"Unknown word: {item}")
+    result += sum1000 * base
+    return result
+
+
 def parse_number_string(
         data: str, 
         mapping: dict[str, int] = NUMBERS_MAP) -> int:
@@ -86,13 +129,12 @@ def parse_number_string(
         except KeyError:
             raise UnknownWordError(f"Unknown word: {item}")
     result += sub_sum
-
     return result
 
 
 def main() -> None:
     try:
-        assert(parse_number_string("one million two hundred fourteen thousand seven hundred eight") == 1214708)
+        assert(parse_number_string_rtl("one million two hundred fourteen thousand seven hundred eight") == 1214708)
         assert(parse_number_string("zero thousands four") == 4)
         assert(parse_number_string("zero million") == 0)
 
