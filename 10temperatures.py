@@ -13,7 +13,7 @@ for i in range(READ_COUNT):
     source.append(value)
 
 # Print the entire array
-print(f"List of temperatures in °C:")
+print("List of temperatures in °C:")
 for each_item in source:
     print(each_item, end="  ")
 print()
