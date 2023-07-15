@@ -2,3 +2,5 @@
 *.exe
 *.pyc
 tmp.*
+
+!/.devcontainer/
