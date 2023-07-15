@@ -1,0 +1,6 @@
+Jan 2 20:31:02 tmcent01 postfix/smtpd[26524]: connect from unknown[192.168.75.1]
+Jan 2 20:31:12 tmcent01 postfix/smtpd[26524]: B58C4330038: client=unknown[192.168.75.1]
+Jan 2 20:31:17 tmcent01 postfix/cleanup[27426]: B58C4330038: message-id=<20120103023112.B58C4330038@tmcent01.training5.tm>
+Jan 2 20:31:17 tmcent01 postfix/qmgr[26454]: B58C4330038: from=<asdf@asdf.com>, size=711, nrcpt=1 (queue active)
+Jan 2 20:31:17 tmcent01 postfix/local[27450]: B58C4330038: to=<root@tmcent01.training5.tm>, orig_to=<postmaster>, relay=local, delay=9.7, delays=9.6/0.03/0/0.02, dsn=2.0.0, status=sent (delivered to mailbox)
+Jan 2 20:31:17 tmcent01 postfix/qmgr[26454]: B58C4330038: removed
