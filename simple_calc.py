@@ -3,7 +3,6 @@ https://www.reddit.com/r/learnpython/comments/ts9pe9/need_help/
 """
 
 from typing import Optional
-from unittest.loader import VALID_MODULE_NAME
 
 
 VALID_OPERATORS = "+-*/"
