@@ -3,6 +3,7 @@ A cat walking in a maze
 https://www.reddit.com/r/pythonhelp/comments/14zueyy/code_exceeding_maximum_processing_time/
 """
 
+from os import system, name
 from time import sleep
 from typing import Callable, Optional
 
@@ -27,14 +28,20 @@ SYMBOL_FLOOR = '_'
 SYMBOL_HOLE = '.'
 
 
+def clear_screen():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
+
+
 def display_map(map: list[str], position: int, floor: int) -> None:
-    # TODO Clear screen
-    print("\n\n")
+    clear_screen()
     for idx, row in enumerate(map):
         level = row
         if idx == floor:    # Replace current position with cat
             level = row[:position] + SYMBOL_CAT + row[position + 1:]
-        print(level)
+        print(level.strip())
     # Wait a moment
     sleep(1)
 
@@ -53,6 +60,7 @@ def walk_through_map(map: list[str], display_fn: Optional[Callable] = None,
 
         while True:
             if verify_map_level(level):
+                # Not in the assignment but we can have some fun, can't we?
                 print(f"The cat died from starvation. He cannot escape floor #{level_idx}.")
                 break
 
@@ -67,7 +75,9 @@ def walk_through_map(map: list[str], display_fn: Optional[Callable] = None,
                 level = map[level_idx].strip()
             elif current_symbol == SYMBOL_SNACK:
                     result += 1
+                    # Replace food symbol with floor symbol
                     level = level[:position] + SYMBOL_FLOOR + level[position + 1:]
+                    # Update map so that the updated floor can be displayed
                     map[level_idx] = level
             elif current_symbol == SYMBOL_FLOOR:
                 if direction == 1 and position + 1 == len(level):   # At the right end
@@ -82,7 +92,9 @@ def walk_through_map(map: list[str], display_fn: Optional[Callable] = None,
 
 
 def main() -> None:
-    for (map_path, expected) in LIST_SCENARIOS:
+    map_id = 9
+    # If all the maps should be run, remove the slice at the end of this line:
+    for (map_path, expected) in LIST_SCENARIOS[map_id - 1:map_id]:
         print(f"\nMap: {map_path}")
         with open(map_path) as map_file:
             result = walk_through_map(map_file.readlines(), display_fn=display_map)
