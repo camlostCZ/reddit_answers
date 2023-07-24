@@ -4,3 +4,4 @@
 tmp.*
 
 !/.devcontainer/
+!/.vscode/
