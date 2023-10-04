@@ -4,6 +4,7 @@ cycler==0.11.0
 fonttools==4.37.1
 idna==3.3
 kiwisolver==1.4.4
+lxml
 matplotlib==3.5.3
 numpy==1.23.2
 packaging==21.3
